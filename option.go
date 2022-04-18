@@ -2,6 +2,7 @@ package optional
 
 import (
 	"fmt"
+	"reflect"
 )
 
 // Some is a value that represents the presence of a value.
@@ -27,8 +28,15 @@ func (o *Option[T]) Value() T {
 
 // IsNone returns true if the Option is None.
 func (o Option[T]) IsNone() bool {
-	var temp any = o.value
-	return temp == nil || o.null
+	if o.null {
+		return true
+	}
+	value := reflect.ValueOf(o.value)
+	switch value.Kind() {
+	case reflect.Chan, reflect.Func, reflect.Interface, reflect.Map, reflect.Ptr, reflect.Slice:
+		return value.IsNil()
+	}
+	return false
 }
 
 // IsSome returns true if the Option is not None.

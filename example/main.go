@@ -6,16 +6,10 @@ import (
 )
 
 func main() {
-	a := optional.Some[int](1)
-	fmt.Println(a)
-	fmt.Println(a.IsNone())
-	fmt.Println(a.IsSome())
-	fmt.Println(a.Unwrap())
-	fmt.Println(a.UnwrapOr(2))
-	b := a.Replace(2)
-	fmt.Println(a)
-	fmt.Println(b)
-	fmt.Println(a.Map(func(i int) int { return i + 1 }))
-	fmt.Println(a.Filter(func(i int) bool { return i == 2 }))
-	fmt.Println(optional.None[string]().IsNone())
+	hello := optional.Some[string]("Hello")
+	world := optional.Some[string](" World")
+	result := world.Map(func(s string) string {
+		return hello.Unwrap() + s
+	})
+	fmt.Println(result.Unwrap())
 }
