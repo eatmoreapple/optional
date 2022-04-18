@@ -4,7 +4,7 @@ Optional is a library that provides option types for Go types.
 
 ## Installation
 
-Golang version 1.11 + required
+Golang version 1.18 + required
 
 ```shell
 go get -u github.com/eatmoreapple/optional
