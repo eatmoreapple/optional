@@ -1,6 +1,8 @@
 package optional
 
-import "testing"
+import (
+	"testing"
+)
 
 func TestOption_IsNone(t *testing.T) {
 	a := Some(1)
@@ -97,7 +99,7 @@ func TestOption_MapOr(t *testing.T) {
 	if a.MapOr(3, func(i int) int { return i + 1 }) != 2 {
 		t.Error("a.MapOr(3, func(i int) int { return i + 1 }) != 2")
 	}
-	b := Some[any](nil)
+	b := Some[interface{}](nil)
 	if b.MapOr(3, func(i any) any { return i }) != 3 {
 		t.Error("b.MapOr(3, func(i int) int { return i + 1 }) != 3")
 	}
